@@ -5,7 +5,7 @@ import os
 from discord.ext import commands
 from dotenv import load_dotenv
 
-# Carrega as variáveis de ambiente do arquivo .env
+# Carrega as variáveis de ambiente do arquivo ..env
 load_dotenv()
 
 # Configurações do bot
@@ -83,6 +83,19 @@ async def play(ctx, url):
         
     except Exception as e:
         await ctx.send(f"Erro: {str(e)}")
+
+@bot.command(name='stop')
+async def stop(ctx):
+    voice_client = ctx.voice_client
+
+    # Se o bot estiver tocando ele é parado e desconectado.
+    if voice_client and voice_client.is_connected():
+        if voice_client.is_playing():
+            voice_client.stop()
+        await voice_client.disconnect()
+        await ctx.send('Acabou a festa, então o bot saiu do canal')
+    else:
+        await ctx.send('O bot não está em um canal de voz.')
 
 if __name__ == "__main__":
     TOKEN = os.getenv('DISCORD_TOKEN')
