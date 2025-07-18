@@ -30,6 +30,9 @@ ffmpeg_options = {
 
 ytdl = yt_dlp.YoutubeDL(ytdl_format_options)
 
+# URL exclusivo kasino
+KASINO = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+
 class YTDLSource(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=0.5):
         super().__init__(source, volume)
@@ -56,6 +59,10 @@ async def play(ctx, url):
     if not ctx.author.voice:
         await ctx.send("Você precisa estar em um canal de voz")
         return
+    
+@bot.command(name='kasino')
+async def kasino(ctx):
+    await play_audio(ctx, KASINO,"SABADASSO")
     
     # Conecta ao canal de voz do usuário
     channel = ctx.author.voice.channel
