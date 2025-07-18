@@ -5,7 +5,7 @@ import os
 from discord.ext import commands
 from dotenv import load_dotenv
 
-# Carrega as variáveis de ambiente do arquivo ..env
+# Carrega as variáveis de ambiente do arquivo .env
 load_dotenv()
 
 # Configurações do bot
@@ -39,7 +39,6 @@ class YTDLSource(discord.PCMVolumeTransformer):
         self.data = data
         self.title = data.get('title')
 
-    @classmethod
     async def from_url(cls, url, *, loop=None):
         loop = loop or asyncio.get_event_loop()
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=False))
@@ -51,7 +50,12 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
 @bot.event
 async def on_ready():
-    print(f'{bot.user} está online!')
+    print(f'{bot.user} está online')
+
+@bot.command(name='kasino')
+async def kasino(ctx):
+    await play(ctx, KASINO)
+    await ctx.send("SABADASSO")
 
 @bot.command(name='play')
 async def play(ctx, url):
@@ -59,10 +63,6 @@ async def play(ctx, url):
     if not ctx.author.voice:
         await ctx.send("Você precisa estar em um canal de voz")
         return
-    
-@bot.command(name='kasino')
-async def kasino(ctx):
-    await play_audio(ctx, KASINO,"SABADASSO")
     
     # Conecta ao canal de voz do usuário
     channel = ctx.author.voice.channel
@@ -102,7 +102,7 @@ async def stop(ctx):
         await voice_client.disconnect()
         await ctx.send('Acabou a festa, então o bot saiu do canal')
     else:
-        await ctx.send('O bot não está em um canal de voz.')
+        await ctx.send('O bot não está em um canal de voz')
 
 if __name__ == "__main__":
     TOKEN = os.getenv('DISCORD_TOKEN')
