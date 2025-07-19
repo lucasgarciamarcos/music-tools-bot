@@ -92,6 +92,35 @@ async def play(ctx, url):
     except Exception as e:
         await ctx.send(f"Erro: {str(e)}")
 
+@bot.command(name='tocar')
+async def tocar(ctx, *, query):
+    if not ctx.author.voice:
+        await ctx.send ('Você precisa estar em um canal de voz')
+        return
+
+    channel = ctx.author.voice.channel
+    voice_client = ctx.voice_client
+
+    if voice_client is None:
+        voice_client = await channel.connect()
+    elif voice_client.channel != channel:
+        await voice_client.move_to(channel)
+
+    if voice_client.is_playing():
+        voice_client.stop()
+
+    try:
+        await ctx.send("Buscando o fado, só um minuto...")
+
+        search_query = f'ytsearch:{query.strip()}'
+        player = await YTDLSource.from_url(search_query, loop=bot.loop)
+
+        voice_client.play(player)
+        await ctx.send(f"Coloquei pra tocar essa pedrada: **{player.title}**")
+
+    except Exception as e:
+        await ctx.send(f"Deu ruim!: {str(e)}")
+
 @bot.command(name='stop')
 async def stop(ctx):
     voice_client = ctx.voice_client
