@@ -1,5 +1,4 @@
 import discord
-import yt_dlp
 import os
 from source_client import YTDLSource
 from discord.ext import commands
@@ -12,18 +11,6 @@ load_dotenv()
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='$', intents=intents)
-
-# Configurações do yt-dlp
-ytdl_format_options = {
-    'format': 'bestaudio/best',
-    'noplaylist': True,
-    'nocheckcertificate': True,
-    'ignoreerrors': False,
-    'quiet': True,
-    'no_warnings': True,
-}
-
-ytdl = yt_dlp.YoutubeDL(ytdl_format_options)
 
 # URL exclusivo kasino
 KASINO = "https://youtu.be/LCDaw0QmQQc?si=s9E1Z9QNThLdL9qc"
