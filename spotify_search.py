@@ -44,8 +44,7 @@ class SpotifySimple:
             response = requests.get(url, headers=headers)
             items = response.json()["items"]
             
-            return [{"music": item["track"]["name"], "artist": item["track"]["artists"][0]["name"]} 
-                   for item in items if item["track"]]
+            return [{"music": item["track"]["name"], "artist": item["track"]["artists"][0]["name"]} for item in items if item["track"]]
         
         elif "/album/" in spotify_link:
             # Várias músicas (álbum)
@@ -54,8 +53,7 @@ class SpotifySimple:
             response = requests.get(url, headers=headers)
             items = response.json()["items"]
             
-            return [{"music": track["name"], "artist": track["artists"][0]["name"]} 
-                   for track in items]
+            return [{"music": track["name"], "artist": track["artists"][0]["name"]} for track in items]
         
         # Link inválido
         return []
