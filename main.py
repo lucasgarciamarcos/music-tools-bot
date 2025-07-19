@@ -1,6 +1,7 @@
 import discord
 import os
-from source_client import YTDLSource
+from utils import validate_input
+from queue_server import QueueServer
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -11,6 +12,15 @@ load_dotenv()
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='$', intents=intents)
+
+# Dicionário para armazenar QueueServer por servidor
+queues = {}
+
+def get_queue_server(guild_id, bot, context):
+    """Obtém ou cria uma QueueServer para o servidor"""
+    if guild_id not in queues:
+        queues[guild_id] = QueueServer(bot, context)
+    return queues[guild_id]
 
 @bot.event
 async def on_ready():
@@ -39,52 +49,23 @@ async def play(context, url):
     elif voice_client.channel != channel:
         await voice_client.move_to(channel)
     
-    # Para qualquer música atual
-    if voice_client.is_playing():
-        voice_client.stop()
-    
     try:
-        await context.send("Carregando...")
+        # Valida a entrada
+        url = url.strip()
+        search_type = validate_input(url)
+
+        if search_type == 'spotify':
+            # Se for Spotify, converte para YouTube
+            raise Exception("Spotify não é suportado ainda.")
+        elif search_type == 'query':
+            # Se for texto faz uma busca no YouTube
+            url = f'ytsearch:{url}'
         
-        # Baixa e prepara o áudio
-        player = await YTDLSource.from_url(url, loop=bot.loop)
-        
-        # Reproduz a música
-        voice_client.play(player)
-        
-        await context.send(f"Playing: **{player.title}**")
-        
+        # Instancia da fila
+        actual_queue = get_queue_server(context.guild.id, bot, context)
+        await actual_queue.add_queue(url)
     except Exception as e:
         await context.send(f"Erro: {str(e)}")
-
-@bot.command(name='tocar')
-async def tocar(context, *, query):
-    if not context.author.voice:
-        await context.send ('Você precisa estar em um canal de voz')
-        return
-
-    channel = context.author.voice.channel
-    voice_client = context.voice_client
-
-    if voice_client is None:
-        voice_client = await channel.connect()
-    elif voice_client.channel != channel:
-        await voice_client.move_to(channel)
-
-    if voice_client.is_playing():
-        voice_client.stop()
-
-    try:
-        await context.send("Buscando o fado, só um minuto...")
-
-        search_query = f'ytsearch:{query.strip()}'
-        player = await YTDLSource.from_url(search_query, loop=bot.loop)
-
-        voice_client.play(player)
-        await context.send(f"Coloquei pra tocar essa pedrada: **{player.title}**")
-
-    except Exception as e:
-        await context.send(f"Deu ruim!: {str(e)}")
 
 @bot.command(name='stop')
 async def stop(context):
