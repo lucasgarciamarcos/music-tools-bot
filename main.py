@@ -1,9 +1,10 @@
 import discord
 import os
+from dotenv import load_dotenv
+from discord.ext import commands
 from utils import validate_input
 from queue_server import QueueServer
-from discord.ext import commands
-from dotenv import load_dotenv
+from spotify_search import SpotifySimple
 
 # Carrega as variáveis de ambiente do arquivo .env
 load_dotenv()
@@ -56,14 +57,24 @@ async def play(context, url):
 
         if search_type == 'spotify':
             # Se for Spotify, converte para YouTube
-            raise Exception("Spotify não é suportado ainda.")
+            spotify = SpotifySimple(os.getenv('SPOTIFY_CLIENT_ID'), os.getenv('SPOTIFY_CLIENT_SECRET'))
+
+            # Qualquer link - sempre retorna array
+            tracks = spotify.get_tracks_from_link(url)
+
+            for track in tracks:
+                # Trata Playlist ou Album
+                url = f"ytsearch:{track['music']} - {track['artist']}"
+                actual_queue = get_queue_server(context.guild.id, bot, context)
+                await actual_queue.add_queue(url)
+
         elif search_type == 'query':
             # Se for texto faz uma busca no YouTube
             url = f'ytsearch:{url}'
         
-        # Instancia da fila
-        actual_queue = get_queue_server(context.guild.id, bot, context)
-        await actual_queue.add_queue(url)
+            # Instancia da fila
+            actual_queue = get_queue_server(context.guild.id, bot, context)
+            await actual_queue.add_queue(url)
     except Exception as e:
         await context.send(f"Erro: {str(e)}")
 
