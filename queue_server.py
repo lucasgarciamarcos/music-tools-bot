@@ -12,9 +12,10 @@ class QueueServer:
     async def add_queue(self, url):
         """Adiciona uma música à fila"""
         self.queue.append(url)
-        await self.context.send(f"Coloquei seu item na fila.")
         if not self.is_playing:
             await self.start()
+        else:
+            await self.context.send(f"Coloquei seu item na fila.")
 
     def after_playing(self, error):
         """Toca a próxima música na fila após a atual terminar"""
