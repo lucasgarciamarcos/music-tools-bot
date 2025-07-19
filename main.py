@@ -31,7 +31,7 @@ ffmpeg_options = {
 ytdl = yt_dlp.YoutubeDL(ytdl_format_options)
 
 # URL exclusivo kasino
-KASINO = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+KASINO = "https://youtu.be/LCDaw0QmQQc?si=s9E1Z9QNThLdL9qc"
 
 class YTDLSource(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=0.5):
