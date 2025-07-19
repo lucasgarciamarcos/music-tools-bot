@@ -40,14 +40,14 @@ class YTDLSource(discord.PCMVolumeTransformer):
         self.title = data.get('title')
 
     @classmethod
-    async def from_url(cls, url, *, loop=None):
+    async def from_url(self, url, *, loop=None):
         loop = loop or asyncio.get_event_loop()
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=False))
         
         if 'entries' in data:
             data = data['entries'][0]
         
-        return cls(discord.FFmpegPCMAudio(data['url'], **ffmpeg_options), data=data)
+        return self(discord.FFmpegPCMAudio(data['url'], **ffmpeg_options), data=data)
 
 @bot.event
 async def on_ready():
