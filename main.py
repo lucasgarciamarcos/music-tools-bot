@@ -35,7 +35,7 @@ async def kasino(context):
     await context.send("SABADASSO")
 
 @bot.command(name='play')
-async def play(context, url):
+async def play(context, *, url):
     # Verifica se o usuário está em um canal de voz
     if not context.author.voice:
         await context.send("Você precisa estar em um canal de voz")
@@ -70,7 +70,8 @@ async def play(context, url):
 
         elif search_type == 'query':
             # Se for texto faz uma busca no YouTube
-            url = f'ytsearch:{url}'
+            url = f'ytsearch1:{url}'
+            print(f"Buscando no yt: {url}")
         
             # Instancia da fila
             actual_queue = get_queue_server(context.guild.id, bot, context)
@@ -90,6 +91,12 @@ async def stop(context):
         await context.send('Acabou a festa, então o bot saiu do canal')
     else:
         await context.send('O bot não está em um canal de voz')
+
+@bot.command(name='skip')
+async def skip(context):
+    """Pula a musica na fila"""
+    actual_queue = get_queue_server(context.guild.id, bot, context)
+    await actual_queue.next()
 
 if __name__ == "__main__":
     TOKEN = os.getenv('DISCORD_TOKEN')
