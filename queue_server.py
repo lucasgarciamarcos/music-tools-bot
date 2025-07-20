@@ -13,7 +13,7 @@ class QueueServer:
         """Adiciona uma música à fila"""
         self.queue.append(url)
         if not self.is_playing:
-            await self.start()
+            await self.next()
         else:
             await self.context.send(f"Coloquei seu item na fila.")
 
@@ -24,9 +24,9 @@ class QueueServer:
             return
 
         self.is_playing = False
-        self.bot.loop.create_task(self.start())
+        self.bot.loop.create_task(self.next())
 
-    async def start(self):
+    async def next(self):
         """Inicia a reprodução da música atual na fila"""
         
         # Por segurança, verifica se a fila não está vazia
@@ -51,4 +51,4 @@ class QueueServer:
                 await self.context.send(f"Erro: {str(e)}")
                 
                 # Tenta iniciar a próxima música na fila
-                await self.start()
+                await self.next()
