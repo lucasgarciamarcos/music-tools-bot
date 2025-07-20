@@ -92,12 +92,6 @@ async def stop(context):
     else:
         await context.send('O bot não está em um canal de voz')
 
-@bot.command(name='skip')
-async def skip(context):
-    """Pula a musica na fila"""
-    actual_queue = get_queue_server(context.guild.id, bot, context)
-    await actual_queue.next()
-
 if __name__ == "__main__":
     TOKEN = os.getenv('DISCORD_TOKEN')
     
