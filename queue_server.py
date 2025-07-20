@@ -33,22 +33,24 @@ class QueueServer:
         if not self.queue:
             return
         
+        if self.is_playing:
+            self.context.voice_client.stop()
+
         # Trata o proximo item da fila
-        if not self.is_playing:
-            url = self.queue.popleft()
+        url = self.queue.popleft()
 
-            try:
-                # Baixa e prepara o áudio
-                player = await YTDLSource.from_url(url, loop=self.bot.loop)
+        try:
+            # Baixa e prepara o áudio
+            player = await YTDLSource.from_url(url, loop=self.bot.loop)
 
-                # Reproduz a música
-                self.is_playing = True
-                self.context.voice_client.play(player, after=self.after_playing)
-                await self.context.send(f"Playing: **{player.title}**")
+            # Reproduz a música
+            self.is_playing = True
+            self.context.voice_client.play(player, after=self.after_playing)
+            await self.context.send(f"Playing: **{player.title}**")
 
-            except Exception as e:
-                self.is_playing = False
-                await self.context.send(f"Erro: {str(e)}")
-                
-                # Tenta iniciar a próxima música na fila
-                await self.next()
+        except Exception as e:
+            self.is_playing = False
+            await self.context.send(f"Erro: {str(e)}")
+            
+            # Tenta iniciar a próxima música na fila
+            await self.next()

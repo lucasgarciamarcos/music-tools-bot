@@ -8,7 +8,7 @@ def validate_input(text):
         return 'query'
     
     # Se é URL, verifica se é YouTube ou Spotify
-    if 'youtube.com' in text.lower():
+    if any(domain in text.lower() for domain in ['youtube.com', 'youtu.be']):
         return 'youtube'
     elif 'open.spotify.com' in text.lower():
         return 'spotify'
