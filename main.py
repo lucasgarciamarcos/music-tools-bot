@@ -67,15 +67,16 @@ async def play(context, *, url):
                 url = f"ytsearch:{track['music']} - {track['artist']}"
                 actual_queue = get_queue_server(context.guild.id, bot, context)
                 await actual_queue.add_queue(url)
+            return
 
         elif search_type == 'query':
             # Se for texto faz uma busca no YouTube
             url = f'ytsearch1:{url}'
             print(f"Buscando no yt: {url}")
         
-            # Instancia da fila
-            actual_queue = get_queue_server(context.guild.id, bot, context)
-            await actual_queue.add_queue(url)
+        # Instancia da fila
+        actual_queue = get_queue_server(context.guild.id, bot, context)
+        await actual_queue.add_queue(url)
     except Exception as e:
         await context.send(f"Erro: {str(e)}")
 
@@ -91,6 +92,8 @@ async def stop(context):
         await context.send('Acabou a festa, então o bot saiu do canal')
     else:
         await context.send('O bot não está em um canal de voz')
+
+
 
 if __name__ == "__main__":
     TOKEN = os.getenv('DISCORD_TOKEN')
