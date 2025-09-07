@@ -80,9 +80,9 @@ Aqui estão os comandos disponíveis para interagir com o bot:
 
 | Comando                         | Descrição                                             | Exemplo                                                       |
 | ------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------- |
-| `$play <URL ou nome da música>` | Adiciona uma música à fila e começa a tocar.          | `$play https://www.youtube.com/watch?v=dQw4w9WgXcQ`           |
-|                                 |                                                       | `$play Never Gonna Give You Up`                               |
-|                                 |                                                       | `$play https://open.spotify.com/track/4cOdK2wGLETOMhOcdqokrA` |
+| `$play <URL>`                   | Adiciona uma música à fila e começa a tocar.          | `$play https://www.youtube.com/watch?v=dQw4w9WgXcQ`           |
+| `$play <Nome da música>`        |                                                       | `$play Never Gonna Give You Up`                               |
+| `$play <Track ou Playlist>`     |                                                       | `$play https://open.spotify.com/track/4cOdK2wGLETOMhOcdqokrA` |
 | `$stop`                         | Para a reprodução e desconecta o bot do canal de voz. | `$stop`                                                       |
 | `$skip`                         | Pula a música que está tocando no momento.            | `$skip`                                                       |
 | `$kasino`                       | Toca um clássico da música eletrônica nacional.       | `$kasino`                                                     |
