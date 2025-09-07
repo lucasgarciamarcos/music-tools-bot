@@ -31,7 +31,7 @@ async def on_ready():
 async def kasino(context):
     # URL exclusivo kasino
     KASINO = "https://youtu.be/LCDaw0QmQQc?si=s9E1Z9QNThLdL9qc"
-    await play(context, KASINO)
+    await play.callback(context, url=KASINO)
     await context.send("SABADASSO")
 
 @bot.command(name='play')
@@ -46,7 +46,7 @@ async def play(context, *, url):
     voice_client = context.voice_client
     
     if voice_client is None:
-        voice_client = await channel.connect()
+        voice_client = await channel.connect(reconnect=False)
     elif voice_client.channel != channel:
         await voice_client.move_to(channel)
     
@@ -93,7 +93,16 @@ async def stop(context):
     else:
         await context.send('O bot não está em um canal de voz')
 
-
+@bot.command(name='skip')
+async def skip(context):
+    """Pula a musica na fila"""
+    voice_client = context.voice_client
+    
+    if voice_client and voice_client.is_playing():
+        voice_client.stop()  # Isso vai disparar o after_playing que chama next()
+        await context.send("Musica skipada")
+    else:
+        await context.send("Não há música tocando no momento.")
 
 if __name__ == "__main__":
     TOKEN = os.getenv('DISCORD_TOKEN')
