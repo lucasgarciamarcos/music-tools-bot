@@ -1,6 +1,13 @@
 # Discord Music Bot
 
-Um bot de música para Discord simples e fácil de usar, com suporte para YouTube e Spotify.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/Discord.py-5865F2?style=for-the-badge&logo=discord&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spotify-1ED760?style=for-the-badge&logo=spotify&logoColor=white" />
+  <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" />
+</p>
+
+Um bot de música para Discord simples e fácil de usar, com suporte para YouTube e Spotify, ideal para demonstrar suas habilidades em desenvolvimento de bots e integração de APIs em seu portfólio.
 
 ## ✨ Recursos
 
@@ -8,6 +15,14 @@ Um bot de música para Discord simples e fácil de usar, com suporte para YouTub
 - Reproduz músicas, playlists e álbuns do Spotify
 - Sistema de fila de reprodução
 - Comandos simples e intuitivos
+
+## 🛠️ Tecnologias Utilizadas
+
+- **[Python](https://www.python.org/)**: A linguagem de programação principal do projeto.
+- **[Discord.py](https://discordpy.readthedocs.io/en/stable/)**: Uma biblioteca Python para criar bots para o Discord.
+- **[Spotify Web API](https://developer.spotify.com/documentation/web-api/)**: Para buscar informações sobre músicas, álbuns e playlists.
+- **[yt-dlp](https://github.com/yt-dlp/yt-dlp)**: Para extrair o áudio de vídeos do YouTube.
+- **[FFmpeg](https://ffmpeg.org/)**: Para processamento de áudio.
 
 ## 🚀 Começando
 
@@ -67,9 +82,20 @@ Aqui estão os comandos disponíveis para interagir com o bot:
 | | | `$play https://open.spotify.com/track/4cOdK2wGLETOMhOcdqokrA` |
 | `$stop` | Para a reprodução e desconecta o bot do canal de voz. | `$stop` |
 | `$skip` | Pula a música que está tocando no momento. | `$skip` |
-| `$kasino` | Toca um clássico da música eletrônica INTERnacional. | `$kasino` |
+| `$kasino` | Toca um clássico da música eletrônica nacional. | `$kasino` |
 
 ## 📝 Lista de Tarefas (To-Do)
 
 - [ ] Adicionar comando para ver a fila de reprodução
+- [ ] Adicionar comando para remover uma música da fila
 - [ ] Adicionar comando para pausar e resumir a reprodução
+- [ ] Adicionar suporte para mais plataformas (SoundCloud, etc.)
+- [ ] Melhorar o tratamento de erros
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+## 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
