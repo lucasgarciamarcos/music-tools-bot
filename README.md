@@ -90,15 +90,4 @@ Aqui estão os comandos disponíveis para interagir com o bot:
 ## 📝 Lista de Tarefas (To-Do)
 
 - [ ] Adicionar comando para ver a fila de reprodução
-- [ ] Adicionar comando para remover uma música da fila
 - [ ] Adicionar comando para pausar e resumir a reprodução
-- [ ] Adicionar suporte para mais plataformas (SoundCloud, etc.)
-- [ ] Melhorar o tratamento de erros
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
