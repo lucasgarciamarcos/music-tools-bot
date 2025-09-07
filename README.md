@@ -38,18 +38,21 @@ Siga estas instruções para configurar e executar o bot em seu próprio servido
 ### Instalação
 
 1. **Clone o repositório:**
+
    ```bash
    git clone https://github.com/seu-usuario/seu-repositorio.git
    cd seu-repositorio
    ```
 
 2. **Crie e ative um ambiente virtual:**
+
    ```bash
    python -m venv venv
    venv\scripts\Activate
    ```
 
 3. **Instale as dependências:**
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -75,14 +78,14 @@ python main.py
 
 Aqui estão os comandos disponíveis para interagir com o bot:
 
-| Comando | Descrição | Exemplo |
-|---|---|---|
-| `$play <URL ou nome da música>` | Adiciona uma música à fila e começa a tocar. | `$play https://www.youtube.com/watch?v=dQw4w9WgXcQ` |
-| | | `$play Never Gonna Give You Up` |
-| | | `$play https://open.spotify.com/track/4cOdK2wGLETOMhOcdqokrA` |
-| `$stop` | Para a reprodução e desconecta o bot do canal de voz. | `$stop` |
-| `$skip` | Pula a música que está tocando no momento. | `$skip` |
-| `$kasino` | Toca um clássico da música eletrônica nacional. | `$kasino` |
+| Comando                         | Descrição                                             | Exemplo                                                       |
+| ------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------- |
+| `$play <URL ou nome da música>` | Adiciona uma música à fila e começa a tocar.          | `$play https://www.youtube.com/watch?v=dQw4w9WgXcQ`           |
+|                                 |                                                       | `$play Never Gonna Give You Up`                               |
+|                                 |                                                       | `$play https://open.spotify.com/track/4cOdK2wGLETOMhOcdqokrA` |
+| `$stop`                         | Para a reprodução e desconecta o bot do canal de voz. | `$stop`                                                       |
+| `$skip`                         | Pula a música que está tocando no momento.            | `$skip`                                                       |
+| `$kasino`                       | Toca um clássico da música eletrônica nacional.       | `$kasino`                                                     |
 
 ## 📝 Lista de Tarefas (To-Do)
 
