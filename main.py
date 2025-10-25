@@ -1,5 +1,7 @@
 import discord
 import os
+import subprocess
+import sys
 from dotenv import load_dotenv
 from discord.ext import commands
 from utils import validate_input
@@ -104,7 +106,20 @@ async def skip(context):
     else:
         await context.send("Não há música tocando no momento.")
 
+def upgrade_dependencies():
+    try:
+        print("Atualizando pip...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
+        print("Pip atualizado com sucesso.")
+        
+        print("Atualizando yt-dlp...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "yt-dlp"])
+        print("yt-dlp atualizado com sucesso.")
+    except subprocess.CalledProcessError as e:
+        print(f"Erro ao atualizar dependências: {e}")
+
 if __name__ == "__main__":
+    upgrade_dependencies()
     TOKEN = os.getenv('DISCORD_TOKEN')
     
     if not TOKEN:
